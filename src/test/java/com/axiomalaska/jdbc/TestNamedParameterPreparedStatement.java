@@ -1,19 +1,14 @@
 package com.axiomalaska.jdbc;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import com.axiomalaska.jdbc.NamedParameterPreparedStatement.ParseResult;
+import com.google.common.collect.Lists;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-
-import org.junit.Test;
-
-import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
-import com.axiomalaska.jdbc.NamedParameterPreparedStatement.ParseResult;
-import com.google.common.collect.Lists;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestNamedParameterPreparedStatement {
     @Test
@@ -23,7 +18,7 @@ public class TestNamedParameterPreparedStatement {
         List<String> expectedParameterList = Lists.newArrayList("param1", "param2", "param2");
         ParseResult parseResult = NamedParameterPreparedStatement.parse(testQuery);
         assertEquals(expectedParsedQuery, parseResult.getSql());
-        assertThat(expectedParameterList, is(parseResult.getOrderedParameters()));
+        assertEquals(expectedParameterList, parseResult.getOrderedParameters());
     }
 
     @Test
@@ -33,7 +28,7 @@ public class TestNamedParameterPreparedStatement {
         List<String> expectedParameterList = Lists.newArrayList("named_parameter1", "named_parameter2");
         ParseResult parseResult = NamedParameterPreparedStatement.parse(testQuery);
         assertEquals(expectedParsedQuery, parseResult.getSql());
-        assertThat(expectedParameterList, is(parseResult.getOrderedParameters()));
+        assertEquals(expectedParameterList, parseResult.getOrderedParameters());
     }
 
     @Test
@@ -43,6 +38,6 @@ public class TestNamedParameterPreparedStatement {
         List<String> expectedParameterList = Lists.newArrayList("some_field_value");
         ParseResult parseResult = NamedParameterPreparedStatement.parse(testQuery);
         assertEquals(expectedParsedQuery, parseResult.getSql());
-        assertThat(expectedParameterList, is(parseResult.getOrderedParameters()));
+        assertEquals(expectedParameterList, parseResult.getOrderedParameters());
     }
 }
